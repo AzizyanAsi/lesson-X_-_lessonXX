@@ -26,44 +26,21 @@ public class MenuMain {
         Storage.addGroup(group1, "2", Storage.getRoots(), true);
         Storage.addGroup(group2, "3", Storage.getRoots(), true);
         List<List<String>> records = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("src/resources/item.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\User\\Desktop\\lesson-X_-_lessonXX\\resources\\item.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(DELIMITER);
                 addItem(new Stock(values,Configuration.Resolution.HD),values[4],getRoots());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new AppRuntimeException();
+
         }
         System.out.println(findHighestPricedItem());
-        //        Scanner sc = new Scanner(System.in);
-//        boolean isMenuActive = true;
-//        while (isMenuActive) {
-//            System.out.println("type group name or continue");
-//            String s = sc.nextLine();
-//            switch (s) {
-//                case "continue":
-//                    isMenuActive = false;
-//                    generateItem(sc);
-//
-//                    break;
-//                default:
-//                    if (s.isEmpty()) {
-//                        break;
-//                    }
-//                    Group g = new Group(UUID.randomUUID().toString(), s);
-//                    System.out.println("Type Parent id");
-//                    String parentId = sc.nextLine();
-//                    Storage.addGroup(g,parentId,Storage.getRoots(), true);
-//                    System.out.print("Created group: ");
-//                    System.out.println(g);
-//            }
-//        }
-//        for (Group x : Storage.getRoots()) {
-//            x.printContent();
-//
-//        }
-//        System.out.println(String.format("Total price %f", basket.calculatePrice()));
+        System.out.println(findItemByTitle("Test2"));
+        System.out.println(findAveragePriceRateInTheGroup(group));
+        System.out.println(findHighestPricedItemInTheDirectGroup(group1));
+
     }
 
     private static void generateItem(Scanner sc) {
